@@ -1,0 +1,13 @@
+prefix=c:/Users/bhavy/OneDrive/Desktop/house price prediction with the help of streeamlit/.conda/Library
+exec_prefix=c:/Users/bhavy/OneDrive/Desktop/house price prediction with the help of streeamlit/.conda/Library
+libdir=c:/Users/bhavy/OneDrive/Desktop/house price prediction with the help of streeamlit/.conda/Library/lib
+sharedlibdir=c:/Users/bhavy/OneDrive/Desktop/house price prediction with the help of streeamlit/.conda/Library/lib
+includedir=c:/Users/bhavy/OneDrive/Desktop/house price prediction with the help of streeamlit/.conda/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.3.1
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

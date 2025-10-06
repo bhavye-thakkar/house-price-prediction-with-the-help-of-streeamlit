@@ -1,9 +1,20 @@
 import streamlit as st
 import joblib
 import numpy as np
+import logging
 
+# Configure logging to help debug issues
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-model = joblib.load("rfr_model.pkl")
+try:
+    logger.info("Attempting to load model...")
+    model = joblib.load("rfr_model.pkl")
+    logger.info("Model loaded successfully")
+except Exception as e:
+    logger.error(f"Failed to load model: {e}")
+    st.error(f"Error loading model: {e}")
+    st.stop()
 
 
 st.title("House Price Prediction app")
@@ -28,16 +39,21 @@ preict_button = st.button("Predict Price !!")
 
 
 if preict_button:
+    try:
+        st.balloons()
 
-    st.balloons()
+        x_array = np.array(x).reshape(1, -1)
+        logger.info(f"Input array shape: {x_array.shape}")
 
-    x_array = np.array(x).reshape(1, -1)
+        predction = model.predict(x_array)[0]
+        logger.info(f"Prediction successful: {predction}")
 
-    predction = model.predict(x_array)[0]
-
-    st.write (f"price prediction is : {predction:,.2f}")
-
-else: 
+        st.write (f"price prediction is : {predction:,.2f}")
+    except Exception as e:
+        logger.error(f"Prediction failed: {e}")
+        st.error(f"Error making prediction: {e}")
+        st.write("Please check your input values and try again.")
+else:
     st.write ("please use predict button after entering all the values")
 
 
